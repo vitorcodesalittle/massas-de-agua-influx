@@ -4,7 +4,7 @@ import json
 from datetime import datetime
 
 from influxdb_client import InfluxDBClient, Point, WritePrecision
-from influxdb_client.client.write_api import SYNCHRONOUS
+from influxdb_client.client.write_api import WriteOptions
 
 def loaddata(path="./atlas_cap_subterranea.geojson"):
     with open(path, 'r') as datafile:
@@ -20,18 +20,19 @@ org = os.getenv("org")
 bucket = os.getenv("bucket")
 
 with InfluxDBClient(url="http://localhost:8086", token=token, org=org) as client:
-    write_api = client.write_api(write_options=SYNCHRONOUS)
-    for feature in data['features']:
-        point = Point("captacoes_subterraneas").time(datetime.utcnow(), WritePrecision.NS)
-        props = feature['properties']
-        geometry = feature['geometry']
-        for [lat, lon] in geometry['coordinates']:
-            point = point.field('lat', lat)
-            point = point.field('lon', lon)
-        for key, value in props.items():
-            if key in tags:
-                point = point.tag(key, value)
-            elif key in fields:
-                point = point.field(key, value)
-        write_api.write(bucket, org, point)
+    options = WriteOptions(batch_size=100, flush_interval=8, jitter_interval=0, retry_interval=1000)
+    with client.write_api(options) as write_api:
+        for feature in data['features']:
+            point = Point("captacoes_subterraneas").time(datetime.utcnow(), WritePrecision.NS)
+            props = feature['properties']
+            geometry = feature['geometry']
+            for [lat, lon] in geometry['coordinates']:
+                point = point.field('lat', lat)
+                point = point.field('lon', lon)
+            for key, value in props.items():
+                if key in tags:
+                    point = point.tag(key, value)
+                elif key in fields:
+                    point = point.field(key, value)
+            write_api.write(bucket, org, point)
 
