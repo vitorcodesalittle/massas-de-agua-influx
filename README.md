@@ -14,7 +14,7 @@ no `docker-compose.yaml`
 
 ```bash
 git clone git@gitlab.gprt.ufpe.br:sentinella/influxdb-exemplo.git && /
-cd sentinela-influxdb && /
+cd influxdb-exemplo && /
 docker-compose up
 ```
 
