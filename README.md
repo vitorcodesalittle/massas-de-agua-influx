@@ -46,7 +46,7 @@ O site <https://dadosabertos.ana.gov.br> é uma boa fonte de dados, alguns geore
 [Esse documento](https://biblioteca.ana.gov.br/sophia_web/asp/download.asp?codigo=151307&tipo_midia=2&iIndexSrv=1&iUsuario=0&obra=90683&tipo=1&iBanner=0&iIdioma=0) provê mais informações sobre a motivação e a metodologia para construção dessas datasets.
 [Esse mapa interativo](https://portal1.snirh.gov.br/ana/apps/webappviewer/index.html?id=9533a92615b84880b6a7263b6568708b) foi construído com os datasets
 
-- [Atlas ANA Índice de Segurança Urbano](https://dadosabertos.ana.gov.br/maps/897b12b3081c49678a1b2161c372b70c). Seria bom entender como eles montam o formato das separações geográficas para apresentar no mapa online. Podemos facilmente guardar dados de latitude e longitude, porém que dados são necessários para mostrar essas separações precisas e como podemos incorporar esse tipo de informação nos pipelines de dados?
+- [Atlas ANA Índice de Segurança Urbano](https://dadosabertos.ana.gov.br/maps/897b12b3081c49678a1b2161c372b70c). Um exemplo de mapa com dados separados por município
 - [Atlas ANA Captações Superficiais](https://dadosabertos.ana.gov.br/datasets/19e1869946b041bba92b996020925909). Dados com latitude e longitude, mais fáceis de ser apresentados
 
 [Esse script](./cap-sub-geojson-importer.py) foi feito para inserir os dados dos [dados de captação subterrânea](./atlas_cap_subterranea.geojson).
