@@ -14,7 +14,7 @@ services:
       - "8094:8094"
     networks:
       - metrics-net
-    user: telegraf:1000
+    user: telegraf:974 # 974 ou qualquer se seja o id do grupo docker do seu unix
 
   influxdb:
     image: influxdb:2.1.1
