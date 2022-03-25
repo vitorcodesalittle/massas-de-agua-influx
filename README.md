@@ -7,7 +7,7 @@ no escopo do projeto Sentinela
 
 Desenvolvendo localmente é necessário os seguintes softwares:
 
-- [Docker e Docker Compose](/#)
+- [Docker e Docker Compose](https://docs.docker.com/get-started/)
 
 Então é apenas clonar or repositório, entrar nele e subir os serviços descritos
 no `docker-compose.yaml`
@@ -22,7 +22,7 @@ docker-compose up
 
 - [ ] Criar docker-compose.yaml (e se convir um Dockerfile) para o influxdb com configurações inicias
 - [ ] Criar um dashboard exemplo de dados georeferenciados com foco em corpos d'água
-- [ ] Criar hook para adicionar os dashboards ao dar pull
+- [ ] Criar hook para atualizar os dashboards ao dar pull
 - [ ] Experimentar o giraffe para trazer dados a um front end
 - [ ] Pesquisar a respeito de benchmarks que envolvam o influxdb em comparação a outros armazenamentos de dados como redis, kafka, postgres
 
@@ -47,8 +47,7 @@ O site <https://dadosabertos.ana.gov.br> é uma boa fonte de dados, alguns geore
 [Esse mapa interativo](https://portal1.snirh.gov.br/ana/apps/webappviewer/index.html?id=9533a92615b84880b6a7263b6568708b) foi construído com os datasets
 
 - [Atlas ANA Índice de Segurança Urbano](https://dadosabertos.ana.gov.br/maps/897b12b3081c49678a1b2161c372b70c). Seria bom entender como eles montam o formato das separações geográficas para apresentar no mapa online. Podemos facilmente guardar dados de latitude e longitude, porém que dados são necessários para mostrar essas separações precisas e como podemos incorporar esse tipo de informação nos pipelines de dados?
-- [Atlas ANA Captações Superficiais](https://dadosabertos.ana.gov.br/datasets/c8de123becba42e8b058659f3ce632af_1/explore?location=-14.548350%2C-52.659750%2C4.53). Dados com latitude e longitude, mais fáceis de ser apresentados
-- [Lista de Rios](https://www.arcgis.com/home/item.html?id=4577e60f14284963aa6fafbe36a2b7d4). Ainda seria necessário ligar a localização do rio ao nome, ou código dele.
+- [Atlas ANA Captações Superficiais](https://dadosabertos.ana.gov.br/datasets/19e1869946b041bba92b996020925909). Dados com latitude e longitude, mais fáceis de ser apresentados
 
 [Esse script](./cap-sub-geojson-importer.py) foi feito para inserir os dados dos [dados de captação subterrânea](./atlas_cap_subterranea.geojson).
 Podes rodá-lo da seguinte forma:
@@ -61,3 +60,7 @@ pip install influxdb-client
 ```bash
 token=ST8kgXmJ9oVEaWBOmqlB9y4l5a5ilYoNpkVq1SruEzdF-2c5aqy18XDoen03r2oXSOA_JlBsyV3pEqPGcfCHcA== org=sentinela bucket=mybucket python3 cap-sub-geojson-importer.py
 ```
+
+Ele é lento e ainda estou tentando entender porque. Qualquer melhoria é bem vinda.
+
+- [Lista de Rios](https://www.arcgis.com/home/item.html?id=4577e60f14284963aa6fafbe36a2b7d4). Ainda seria necessário ligar a localização do rio ao nome, ou código dele.
