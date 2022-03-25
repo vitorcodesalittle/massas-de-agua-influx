@@ -21,18 +21,17 @@ bucket = os.getenv("bucket")
 
 with InfluxDBClient(url="http://localhost:8086", token=token, org=org) as client:
     write_api = client.write_api(write_options=SYNCHRONOUS)
-    point = Point("captacoes_subterraneas").time(datetime.utcnow(), WritePrecision.NS)
     for feature in data['features']:
+        point = Point("captacoes_subterraneas").time(datetime.utcnow(), WritePrecision.NS)
         props = feature['properties']
         geometry = feature['geometry']
-        coordinates = geometry['coordinates'] # um array de [ lat, lon ]
-        for [lat, lon] in coordinates:
-            point.field('lat', lat)
-            point.field('lon', lon)
+        for [lat, lon] in geometry['coordinates']:
+            point = point.field('lat', lat)
+            point = point.field('lon', lon)
         for key, value in props.items():
             if key in tags:
                 point = point.tag(key, value)
             elif key in fields:
                 point = point.field(key, value)
-    write_api.write(bucket, org, point)
+        write_api.write(bucket, org, point)
 
