@@ -28,6 +28,10 @@ docker-compose up
 
 ## Roadmap Documentação
 
+- [ ] Documentar como adiconar dados
+
+Dados podem ser adicionados facilmente se estiverem no formato csv, ou se houver uma configuração do [telegraf](https://github.com/influxdata/telegraf) que seja capaz de coletar as métricas expostas.
+
 - [ ] Documentar como criar dashboard
 - [ ] Documentar como adicionar painéis a um dashboard
 - [ ] Documentar o básico do flux query
