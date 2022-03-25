@@ -13,8 +13,8 @@ Então é apenas clonar or repositório, entrar nele e subir os serviços descri
 no `docker-compose.yaml`
 
 ```bash
-git clone git@gitlab.gprt.ufpe.br:sentinella/influxdb-exemplo.git && /
-cd influxdb-exemplo && /
+git clone git@gitlab.gprt.ufpe.br:sentinella/influxdb-exemplo.git && \
+cd influxdb-exemplo && \
 docker-compose up
 ```
 
