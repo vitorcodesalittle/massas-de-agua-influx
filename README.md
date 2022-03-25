@@ -49,3 +49,15 @@ O site <https://dadosabertos.ana.gov.br> é uma boa fonte de dados, alguns geore
 - [Atlas ANA Índice de Segurança Urbano](https://dadosabertos.ana.gov.br/maps/897b12b3081c49678a1b2161c372b70c). Seria bom entender como eles montam o formato das separações geográficas para apresentar no mapa online. Podemos facilmente guardar dados de latitude e longitude, porém que dados são necessários para mostrar essas separações precisas e como podemos incorporar esse tipo de informação nos pipelines de dados?
 - [Atlas ANA Captações Superficiais](https://dadosabertos.ana.gov.br/datasets/c8de123becba42e8b058659f3ce632af_1/explore?location=-14.548350%2C-52.659750%2C4.53). Dados com latitude e longitude, mais fáceis de ser apresentados
 - [Lista de Rios](https://www.arcgis.com/home/item.html?id=4577e60f14284963aa6fafbe36a2b7d4). Ainda seria necessário ligar a localização do rio ao nome, ou código dele.
+
+[Esse script](./cap-sub-geojson-importer.py) foi feito para inserir os dados dos [dados de captação subterrânea](./atlas_cap_subterranea.geojson).
+Podes rodá-lo da seguinte forma:
+
+```bash
+# instalar deps
+pip install influxdb-client
+```
+
+```bash
+token=ST8kgXmJ9oVEaWBOmqlB9y4l5a5ilYoNpkVq1SruEzdF-2c5aqy18XDoen03r2oXSOA_JlBsyV3pEqPGcfCHcA== org=sentinela bucket=mybucket python3 cap-sub-geojson-importer.py
+```
