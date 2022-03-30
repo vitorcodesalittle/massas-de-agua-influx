@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import os
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import WriteOptions
@@ -22,17 +22,16 @@ bucket = os.getenv("bucket")
 with InfluxDBClient(url="http://localhost:8086", token=token, org=org) as client:
     options = WriteOptions(batch_size=100, flush_interval=8, jitter_interval=0, retry_interval=1000)
     with client.write_api(options) as write_api:
-        for feature in data['features']:
-            point = Point("captacoes_subterraneas").time(datetime.utcnow(), WritePrecision.NS)
+        for index, feature in enumerate(data['features']):
+            point = Point("captacoes_subterraneas").time(datetime.utcnow() + timedelta(seconds=index*25), WritePrecision.NS)
             props = feature['properties']
             geometry = feature['geometry']
             for [lat, lon] in geometry['coordinates']:
-                point = point.field('lat', lat)
-                point = point.field('lon', lon)
+                point = point.field('lat', f'{lat:.6f}')
+                point = point.field('lon', f'{lon:.6f}')
             for key, value in props.items():
                 if key in tags:
                     point = point.tag(key, value)
                 elif key in fields:
                     point = point.field(key, value)
             write_api.write(bucket, org, point)
-
